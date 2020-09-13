@@ -19,6 +19,7 @@ This project was created using:
 ```bash
 git clone https://github.com/VitorMeirelesOliveira/TSV-Backend
 cd /TSV-Backend
+node myApp.js
 http://localhost:3000/
 ```
 
