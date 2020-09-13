@@ -16,7 +16,7 @@ const opc = async (req, res) => {
   if (data.available_value >= required_value) {
     response.total_value = required_value;
   } else {
-    response.total_value = available_value;
+    response.total_value = data.available_value;
   }
 
   const opc1 = response.total_value * 1.03;
