@@ -4,19 +4,19 @@ export default (mongoose) => {
       type: String,
       required: true,
     },
-    available_value: {
+    availableValue: {
       type: Number,
       required: true,
     },
-    is_client: {
+    isVlient: {
       type: Boolean,
       required: true,
     },
-    has_pix: {
+    hasPix: {
       type: Boolean,
       required: true,
     },
-    is_pix_safra: {
+    isPixSafra: {
       type: Boolean,
       required: true,
     },
