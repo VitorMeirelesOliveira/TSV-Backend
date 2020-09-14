@@ -3,60 +3,60 @@ import { db } from "../models/index.js";
 const Proposal = db.proposal;
 
 const opc = async (req, res) => {
-  const required_value = req.body.required_value;
+  const requiredValue = req.body.requiredValue;
   const cpf = req.body.cpf;
 
   const data = await Proposal.findOne({ cpf: cpf }).exec();
 
   const response = {
-    total_value: 0,
+    totalValue: 0,
     options: [],
   };
 
-  if (data.available_value >= required_value) {
-    response.total_value = required_value;
+  if (data.availableValue >= requiredValue) {
+    response.totalValue = requiredValue;
   } else {
-    response.total_value = data.available_value;
+    response.totalValue = data.availableValue;
   }
 
-  const opc1 = response.total_value * 1.03;
-  const opc1_qnt_portion = 12;
-  const opc1_value_portion = opc1 / 12;
-  const opc1_tax = "3%";
+  const opc1 = response.totalValue * 1.03;
+  const opc1QntPortion = 12;
+  const opc1ValuePortion = opc1 / 12;
+  const opc1Tax = "3%";
 
   response.options.push({
-    qnt_portion: opc1_qnt_portion,
-    value_portion: opc1_value_portion,
-    tax: opc1_tax,
+    qntPortion: opc1QntPortion,
+    valuePortion: opc1ValuePortion,
+    tax: opc1Tax,
   });
 
-  const opc2 = response.total_value * 1.05;
-  const opc2_qnt_portion = 24;
-  const opc2_value_portion = opc2 / 24;
-  const opc2_tax = "5%";
+  const opc2 = response.totalValue * 1.05;
+  const opc2QntPortion = 24;
+  const opc2ValuePortion = opc2 / 24;
+  const opc2Tax = "5%";
 
   response.options.push({
-    qnt_portion: opc2_qnt_portion,
-    value_portion: opc2_value_portion,
-    tax: opc2_tax,
+    qntPortion: opc2QntPortion,
+    valuePortion: opc2ValuePortion,
+    tax: opc2Tax,
   });
 
-  const opc3 = response.total_value * 1.07;
-  const opc3_qnt_portion = 36;
-  const opc3_value_portion = opc3 / 36;
-  const opc3_tax = "7%";
+  const opc3 = response.totalValue * 1.07;
+  const opc3QntPortion = 36;
+  const opc3ValuePortion = opc3 / 36;
+  const opc3Tax = "7%";
 
   response.options.push({
-    qnt_portion: opc3_qnt_portion,
-    value_portion: opc3_value_portion,
-    tax: opc3_tax,
+    qntPortion: opc3QntPortion,
+    valuePortion: opc3ValuePortion,
+    tax: opc3Tax,
   });
 
   res.send(response);
 };
 
 const terms = async (req, res) => {
-  const required_value = req.body.total_value;
+  const requiredValue = req.body.totalValue;
   const cpf = req.body.cpf;
   const option = req.body.option;
   const optin = req.body.optin;
@@ -66,9 +66,9 @@ const terms = async (req, res) => {
   const response = {};
 
   response.condition = {
-    is_client: data.is_client,
-    has_pix: data.has_pix,
-    is_pix_safra: data.is_pix_safra,
+    isClient: data.isClient,
+    hasPix: data.hasPix,
+    isPixSafra: data.isPixSafra,
     terms: data.terms,
   };
 
@@ -77,8 +77,8 @@ const terms = async (req, res) => {
 
 const acp = async (req, res) => {
   const cpf = req.body.cpf;
-  const acp_terms = req.acp_terms;
-  const acp_pix = req.acp_pix;
+  const acpTerms = req.acpTerms;
+  const acpPix = req.acpPix;
 
   const data = await Proposal.findOneAndUpdate({ cpf: cpf }, req.agreed, {
     agreed: true,
